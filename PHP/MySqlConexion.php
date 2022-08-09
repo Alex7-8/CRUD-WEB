@@ -7,7 +7,6 @@ $user = "chacongt_alex56";
 $password = "alex56";
 $database = "chacongt_DBWeb";
 
-
 /*Estilo orientado a objetos*/
 $conn = new mysqli($host, $user, $password, $database);
 
