@@ -33,7 +33,7 @@ function llamadaDemo() {
                     //alert(data.message[index].nombre);
                     const row = document.createElement("tr");
                     row.setAttribute("id", data.message[index].id);
-                    row.setAttribute("onclick", "Editar('" + data.message[index].id + "','" +  data.message[index].nombre + "','" +  data.message[index].apellido + "','" +  data.message[index].mensaje + "');");
+                    row.setAttribute("onclick", "Editar('" + data.message[index].id + "','" +  data.message[index].nombre + "','" +  data.message[index].apellido + "','" +  data.message[index].mensaje + "' );");
 
 
                     const cell = document.createElement("td");
@@ -73,6 +73,7 @@ function ActualizarDatos() {
     var vapellido = document.getElementById("txtApellidoU").value
     var vmensaje = document.getElementById("txtMensajeU").value
     
+    
     if(vnombre == "" || vapellido == "" || vmensaje == ""){
         //alert("complete los campos requeridos");
         Swal.fire({
@@ -83,7 +84,29 @@ function ActualizarDatos() {
           })
     }
     else{
-        
+        fetch('PHP/ActualizarRegistro.php?id=' + document.getElementById("txtIDU").value + '&nombre=' + vnombre + '&apellido=' + vapellido + '&mensaje=' + vmensaje)
+        alert("Registro Actualizado");
+        location.href = "index.html";
+    }
+
+}
+function EliminarDatos() {
+    var vnombre = document.getElementById("txtNombreU").value
+    var vapellido = document.getElementById("txtApellidoU").value
+    var vmensaje = document.getElementById("txtMensajeU").value
+    if(vnombre == "" || vapellido == "" || vmensaje == ""){
+        //alert("complete los campos requeridos");
+        Swal.fire({
+            title: 'Error!',
+            text: 'complete los campos requeridos',
+            icon: 'error',
+            confirmButtonText: 'Cool'
+          })
+    }
+    else{
+        fetch('PHP/BorrarRegistro.php?id=' + document.getElementById("txtIDU").value)
+        alert("Registro eliminado");
+        location.href = "index.html";
     }
 }
 function GuardarDatos() {
@@ -123,6 +146,7 @@ function GuardarDatos() {
                   )
                 //alert(response.message)
                 console.log('Success:', response)
+            
             });
         
     }
