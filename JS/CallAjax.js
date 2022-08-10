@@ -1,8 +1,10 @@
+var iid;
 llamadaDemo();
 
 function Editar(id, nombre, apellido, mensaje){
     //alert(id);
     //https://getbootstrap.com/docs/5.0/components/modal/#options
+  
     document.getElementById("txtIDU").value = id;
     document.getElementById("txtNombreU").value = nombre;
     document.getElementById("txtApellidoU").value = apellido;
@@ -20,8 +22,9 @@ function llamadaDemo() {
     /*Creating an HTML table dynamically
    https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Traversing_an_HTML_table_with_JavaScript_and_DOM_Interfaces#creating_an_html_table_dynamically*/
     //uso de Fetch https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch
-
+   
     fetch('PHP/LeerMsgUsuarios.php')
+        
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -29,6 +32,7 @@ function llamadaDemo() {
             tbodyUser.innerHTML = '';
             if (data.status == "200") {
                 //alert(data.status );
+
                 for (let index = 0; index < data.message.length; index++) {
                     //alert(data.message[index].nombre);
                     const row = document.createElement("tr");
@@ -61,7 +65,16 @@ function llamadaDemo() {
                     cell4.appendChild(cellText4);
                     row.appendChild(cell4);
 
-                    tbodyUser.appendChild(row);
+                    const cell5 = document.createElement("button");
+                    const cellText5 = document.createTextNode("Eliminar");
+                  //  cell5.setAttribute("onclick", "EliminarDatos();");
+                    cell5.addEventListener("click", (event) => {
+                         iid = event.target.parentNode.id;
+                        EliminarDatos(iid);
+                    } );
+                    cell5.appendChild(cellText5);
+                    row.appendChild(cell5);
+                  tbodyUser.appendChild(row);
                 }
             }
 
@@ -87,27 +100,17 @@ function ActualizarDatos() {
         fetch('PHP/ActualizarRegistro.php?id=' + document.getElementById("txtIDU").value + '&nombre=' + vnombre + '&apellido=' + vapellido + '&mensaje=' + vmensaje)
         alert("Registro Actualizado");
         location.href = "index.html";
+        
     }
 
 }
-function EliminarDatos() {
-    var vnombre = document.getElementById("txtNombreU").value
-    var vapellido = document.getElementById("txtApellidoU").value
-    var vmensaje = document.getElementById("txtMensajeU").value
-    if(vnombre == "" || vapellido == "" || vmensaje == ""){
-        //alert("complete los campos requeridos");
-        Swal.fire({
-            title: 'Error!',
-            text: 'complete los campos requeridos',
-            icon: 'error',
-            confirmButtonText: 'Cool'
-          })
-    }
-    else{
-        fetch('PHP/BorrarRegistro.php?id=' + document.getElementById("txtIDU").value)
+function EliminarDatos(eid) {
+        
+        fetch('PHP/BorrarRegistro.php?id=' +  eid)
         alert("Registro eliminado");
         location.href = "index.html";
-    }
+
+        
 }
 function GuardarDatos() {
     //alert('Guardando Datos');
