@@ -67,7 +67,10 @@ function llamadaDemo() {
 
                     const cell5 = document.createElement("button");
                     const cellText5 = document.createTextNode("Eliminar");
-                  //  cell5.setAttribute("onclick", "EliminarDatos();");
+                    cell5.style.color = "white";
+                    cell5.style.backgroundColor = "orange";
+                    cell5.style.borderRadius = "5px";
+                    cell5.style.padding = "5px";
                     cell5.addEventListener("click", (event) => {
                          iid = event.target.parentNode.id;
                         EliminarDatos(iid);
@@ -106,10 +109,10 @@ function ActualizarDatos() {
 }
 function EliminarDatos(eid) {
         
-        fetch('PHP/BorrarRegistro.php?id=' +  eid)
+    fetch('PHP/BorrarRegistro.php?id=' +  eid)
         alert("Registro eliminado");
         location.href = "index.html";
-
+        
         
 }
 function GuardarDatos() {
