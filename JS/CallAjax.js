@@ -65,19 +65,30 @@ function llamadaDemo() {
                     cell4.appendChild(cellText4);
                     row.appendChild(cell4);
 
-                    const cell5 = document.createElement("button");
-                    const cellText5 = document.createTextNode("Eliminar");
+                    const cell5 = document.createElement("td");
+                    const cellText5 = document.createTextNode("X");
+            
+                    cell5.style = "text-align: center";
                     cell5.style.color = "white";
                     cell5.style.backgroundColor = "orange";
-                    cell5.style.borderRadius = "5px";
+                    cell5.style.borderRadius = "7px";
                     cell5.style.padding = "5px";
+                    cell5.border = "none";
+                    cell5.width="70px";
+                    cell5.height="30px";
+                    cell5.CDATA_SECTION_NODE = "";
+                    cell5.style.fontWeight = "bold";
+                    cell5.style.cursor = "pointer";
+                    
                     cell5.addEventListener("click", (event) => {
                          iid = event.target.parentNode.id;
                         EliminarDatos(iid);
                     } );
+                    
                     cell5.appendChild(cellText5);
                     row.appendChild(cell5);
-                  tbodyUser.appendChild(row);
+    
+                    tbodyUser.appendChild(row);
                 }
             }
 
@@ -103,6 +114,9 @@ function ActualizarDatos() {
         fetch('PHP/ActualizarRegistro.php?id=' + document.getElementById("txtIDU").value + '&nombre=' + vnombre + '&apellido=' + vapellido + '&mensaje=' + vmensaje)
         alert("Registro Actualizado");
         location.href = "index.html";
+
+
+        
         
     }
 
@@ -146,7 +160,7 @@ function GuardarDatos() {
                 document.getElementById("txtMensaje").value = '';
                 llamadaDemo();
                 Swal.fire(
-                    'Good job!',
+                    'Bien hecho!',
                     response.message,
                     'success'
                   )

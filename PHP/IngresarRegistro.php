@@ -18,7 +18,7 @@ include("./MySqlConexion.php");
 
     if ($conn->query($sql) === TRUE) {
         $response["status"] = 200;
-        $response["message"] = "New record created successfully";
+        $response["message"] = "Registro Guardado";
     } else {
         $response["status"] = 400;
         $response["message"] = "Error: " . $sql . "<br>" . $conn->error;
